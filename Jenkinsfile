@@ -57,9 +57,10 @@ pipeline {
             }
             post {
                 always {
-                    publishCoverage adapters: [
-                        coberturaAdapter('coverage.xml')
-                    ], sourceFileResolver: sourceFiles('STORE_LAST_BUILD')
+                    // Archive coverage reports as artifacts
+                    archiveArtifacts artifacts: 'coverage.xml, htmlcov/**', allowEmptyArchive: true
+                    // If you have the Cobertura plugin installed, uncomment the line below:
+                    // publishCoverage adapters: [coberturaAdapter('coverage.xml')], sourceFileResolver: sourceFiles('STORE_LAST_BUILD')
                 }
             }
         }
